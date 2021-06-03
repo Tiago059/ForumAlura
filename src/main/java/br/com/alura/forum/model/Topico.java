@@ -27,7 +27,7 @@ public class Topico {
 	@Enumerated(EnumType.STRING)
 	private StatusTopico status = StatusTopico.NAO_RESPONDIDO;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	private Usuario autor;
 	
 	@ManyToOne
