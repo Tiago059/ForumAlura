@@ -37,6 +37,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		.formLogin();
 	}
 	
+	
 	// Configurações de recursos estáticos tal como js ou css
 	@Override
 	public void configure(WebSecurity web) throws Exception {
