@@ -52,6 +52,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/topicos").permitAll()
 		.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
 		.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+		.antMatchers(HttpMethod.GET, "/**.html").permitAll()
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
 		.anyRequest().authenticated()
 		.and()
@@ -62,9 +63,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
 	}
 	
-	// Configurações de recursos estáticos tal como js ou css
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		
-	}
+	//Configurações de Recursos Estáticos(js, css, imagens, etc)
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
+    }
 }
