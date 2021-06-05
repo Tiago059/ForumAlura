@@ -36,4 +36,28 @@ public class TokenService {
 				
 	}
 
+	public boolean validarToken(String token) {
+		try {
+			Jwts
+			.parser()
+			.setSigningKey(this.secret)
+			.parseClaimsJws(token);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+
+	public Long getIdUsuario(String token) {
+		return Long.parseLong (
+		 Jwts
+		 .parser()
+		 .setSigningKey(this.secret)
+		 .parseClaimsJws(token)
+		 .getBody()
+		 .getSubject()
+		);
+	}
+
 }
